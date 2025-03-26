@@ -1,9 +1,12 @@
-
 class ApiEndpoints {
   static String baseUrl = 'https://api.escuelajs.co';
   static String signInEndPoint = '/api/v1/auth/login';
   static String signUpEndPoint = '/api/v1/users/';
   static String getCategoriesEndPoint = '/api/v1/categories/';
+  static String getProductsEndPoint = '/api/v1/products/';
+  static String getCategoryProductsEndPoint() {
+    return '/api/v1/products/';
+  }
 }
 
 class ApiKeys {

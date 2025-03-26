@@ -1,6 +1,6 @@
-import 'package:ecommerce/core/network/api_consumer.dart';
-import 'package:ecommerce/core/utils/service_locator.dart';
-import 'package:ecommerce/features/home/presentation/manager/home_cubit.dart';
+
+import 'package:ecommerce/features/home/presentation/manager/category_cubit/category_cubit.dart';
+import 'package:ecommerce/features/home/presentation/manager/product_cubit/product_cubit.dart';
 import 'package:ecommerce/features/home/presentation/views/widgets/products_gridview.dart';
 import 'package:ecommerce/features/home/presentation/views/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +14,13 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(getIt.get<ApiConsumer>())..getCategories(),
+    return RefreshIndicator(
+      color: Colors.blueAccent,
+      backgroundColor: Colors.white,
+      onRefresh: ()async {
+        context.read<ProductCubit>().getProducts(context.read<CategoryCubit>().curIndex);
+      },
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             PageHeading(title: 'Discover'),

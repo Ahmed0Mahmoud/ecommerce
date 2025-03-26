@@ -1,4 +1,3 @@
-import 'package:ecommerce/features/auth/data/models/signUp_model.dart';
 
 class UserState {}
 

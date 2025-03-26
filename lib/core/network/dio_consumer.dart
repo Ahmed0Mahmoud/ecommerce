@@ -22,6 +22,7 @@ class DioConsumer extends ApiConsumer {
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+
   }) async {
     Response response = await dio.get(
       path,

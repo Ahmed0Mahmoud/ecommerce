@@ -3,12 +3,12 @@ import 'package:ecommerce/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:ecommerce/features/auth/presentation/manager/auth_state.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/page_heading.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/show_dialog.dart';
+import 'package:ecommerce/features/home/presentation/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/network/end_points.dart';
 import '../../../../../core/utils/storage_helper.dart';
-import '../../../../home/presentation/views/home_screen.dart';
 import '../sign_up_screen.dart';
 import 'custom_form_button.dart';
 import 'custom_input_field.dart';
@@ -22,14 +22,13 @@ class SignInScreenBody extends StatefulWidget {
 }
 
 class _SignInScreenBodyState extends State<SignInScreenBody> {
-  @override
   getToken() async {
     final token = await StorageHelper().getToken(key: ApiKeys.token);
     print('Token retrieved: $token'); // Debugging print
     if (token != null && token.isNotEmpty) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => MainScreen()),
       );
     }
   }
@@ -49,6 +48,10 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
             message: 'success',
             type: AnimatedSnackBarType.success,
           ).show(context);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => MainScreen()),
+          );
         } else if (state is LoginFailure) {
           ShowAnimatedSnackbar(
             message: state.errMessage,
@@ -61,10 +64,10 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 250,
+              height: 270,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/friendship.png'),
+                  image: AssetImage('assets/images/shopping.jpg'),
                   fit: BoxFit.fill,
                 ),
               ),

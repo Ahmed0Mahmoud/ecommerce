@@ -1,15 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:ecommerce/core/errors/exceptions.dart';
 import 'package:ecommerce/core/network/api_consumer.dart';
 import 'package:ecommerce/core/network/end_points.dart';
 import 'package:ecommerce/core/utils/storage_helper.dart';
-import 'package:ecommerce/core/utils/upload_image_to_api.dart';
 import 'package:ecommerce/features/auth/data/models/login_model.dart';
-import 'package:ecommerce/features/auth/data/models/signUp_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'auth_state.dart';
 
@@ -66,9 +62,9 @@ class UserCubit extends Cubit<UserState> {
         },
       );
       final model = LoginModel.fromJson(response);
-      final decodedToken = JwtDecoder.decode(
-        model.token,
-      ); // فك التوكين واقدر اطلع من جواه الاي دي
+      // final decodedToken = JwtDecoder.decode(
+      //   model.token,
+      // ); // فك التوكين واقدر اطلع من جواه الاي دي
       await StorageHelper().saveToken(model.token);
       //await StorageHelper().saveId(decodedToken['id']);
       emit(LoginSuccess());

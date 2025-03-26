@@ -46,6 +46,7 @@ dependencies:
   flutter_secure_storage:
   animated_snack_bar: ^0.4.0
   get_it:
+  cached_network_image: 
 
 
 

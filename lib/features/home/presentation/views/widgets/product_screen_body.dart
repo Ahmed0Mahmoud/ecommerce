@@ -1,20 +1,45 @@
 import 'package:ecommerce/features/home/presentation/views/widgets/product_details.dart';
-import 'package:ecommerce/features/home/presentation/views/widgets/product_image_detail.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/models/product_model/product_model.dart';
 import 'custom_appbar.dart';
 
 class ProductScreenBody extends StatelessWidget {
-  const ProductScreenBody({super.key});
-
+  final ProductModel model;
+  const ProductScreenBody({super.key, required this.model});
+  checkUrl(String url){
+    final String imageUrl;
+    if (url == "https://www.google.com/imgres?q=imagen&imgurl=https%3A%2F%2Fimages.squarespace-cdn.com%2Fcontent%2Fv1%2F66b4c85b196d2a781c6d469c%2F1723123804144-0NHSZVOKX0WZHZ394I05%2FMeanArea_transparent_rostral.png&imgrefurl=https%3A%2F%2Fwww.imagen-project.org%2F&docid=I2dQXbwsj3ZBYM&tbnid=8yCclcgUSrPsEM&vet=12ahUKEwibj9yH6aWMAxVEhP0HHeHmMIgQM3oECFsQAA..i&w=2500&h=1406&hcb=2&ved=2ahUKEwibj9yH6aWMAxVEhP0HHeHmMIgQM3oECFsQAA" ||
+        url == "https://placehold.co/600x400" || url == 'https://placeimg.com/640/480/any') {
+      imageUrl = "https://media.istockphoto.com/id/1075374570/vector/coming-soon.jpg?s=612x612&w=0&k=20&c=6W1rSRAoJnxtMSi98mGD7LjiXA3xQMotLn8hJnmXjzI=";
+    }
+    else{
+      imageUrl = model.images!.first;
+    }
+    return imageUrl;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CustomAppBar(title: 'Details'),
         SizedBox(height: 20),
-        ProductImageDetail(),
-        ProductDetails(),
+        Center(
+            child: Container(
+            alignment: Alignment.center,
+            width: 341,
+            height: 350,
+            decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image:  NetworkImage(
+                checkUrl(model.images!.first),
+              ),fit: BoxFit.cover),
+            ),
+            ),
+        ),
+        SizedBox(height: 20),
+        ProductDetails(model: model,),
         Spacer(),
         Divider(thickness: 2),
         Container(
@@ -34,7 +59,7 @@ class ProductScreenBody extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$ 1,190',
+                    '\$ ${model.price}',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,

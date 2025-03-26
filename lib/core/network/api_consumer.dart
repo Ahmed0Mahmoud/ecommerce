@@ -6,6 +6,7 @@ abstract class ApiConsumer {
     Map<String, dynamic>? data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+
   });
 
   post(

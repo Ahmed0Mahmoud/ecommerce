@@ -1,8 +1,9 @@
-import 'package:ecommerce/features/home/presentation/manager/home_cubit.dart';
-import 'package:ecommerce/features/home/presentation/manager/home_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../manager/category_cubit/category_cubit.dart';
+import '../../manager/category_cubit/category_states.dart';
 import 'category_card.dart';
 
 class CategoriesListView extends StatelessWidget {
@@ -10,22 +11,22 @@ class CategoriesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeStates>(
+    return BlocBuilder<CategoryCubit, CategoryStates>(
       builder: (context, state) {
         if (state is CategoriesSuccess) {
           return SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 45,
+            height: 70,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 22),
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: CategoryCard(catModel: state.models[index]),
+                  child: CategoryCard(catModel: state.models[index], index: index,),
                 );
               },
-              itemCount: 7,
+              itemCount: 5,
             ),
           );
         } else if (state is CategoriesFailure) {

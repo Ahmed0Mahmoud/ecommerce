@@ -1,7 +1,9 @@
+import 'package:ecommerce/features/home/data/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  final ProductModel model;
+  const ProductDetails({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class ProductDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Fit Polo T Shirt',
+            model.title ?? "empty",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
           ),
           Row(
@@ -38,11 +40,12 @@ class ProductDetails extends StatelessWidget {
             ],
           ),
           Text(
-            'Blue T Shirt . Good for All Men and Suits for All of Them.Blue T Shirt . Good for All Men and Suits for All of Them',
+            model.description ?? "empty" , maxLines: 4,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w400,
               color: Color(0xff808080),
+              overflow: TextOverflow.ellipsis
             ),
           ),
         ],
