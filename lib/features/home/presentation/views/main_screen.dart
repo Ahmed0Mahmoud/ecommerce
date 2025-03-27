@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/network/dio_consumer.dart';
+import '../../../../core/utils/service_locator.dart';
+import '../manager/category_cubit/category_cubit.dart';
+import '../manager/product_cubit/product_cubit.dart';
 import 'home_screen.dart';
 import 'cart_screen.dart';
 import 'account_screen.dart';

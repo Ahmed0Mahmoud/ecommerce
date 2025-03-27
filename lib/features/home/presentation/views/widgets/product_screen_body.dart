@@ -1,7 +1,11 @@
+import 'package:ecommerce/features/home/presentation/manager/cart_cubit.dart';
+import 'package:ecommerce/features/home/presentation/manager/product_cubit/product_cubit.dart';
 import 'package:ecommerce/features/home/presentation/views/widgets/product_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/product_model/product_model.dart';
+import '../cart_screen.dart';
 import 'custom_appbar.dart';
 
 class ProductScreenBody extends StatelessWidget {
@@ -77,7 +81,7 @@ class ProductScreenBody extends StatelessWidget {
                     borderSide: BorderSide(color: Color(0xff3669C9)),
                   ),
                   onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                    context.read<CartCubit>().AddToCart(model);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Row(

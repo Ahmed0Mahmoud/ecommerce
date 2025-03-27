@@ -12,6 +12,13 @@ class ProductCubit extends Cubit<ProductStates> {
   final ApiConsumer api;
   ProductCubit(this.api) : super(ProductInitial());
 
+
+  List<ProductModel> cartOrders = [];
+  void addToCart(ProductModel model) {
+    cartOrders.add(model);
+    emit(ProductUpdatedState()); // Emit a state to update UI
+  }
+
   Future getProducts(int id) async {
     try {
       emit(ProductsLoading());

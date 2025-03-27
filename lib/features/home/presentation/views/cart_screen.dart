@@ -6,6 +6,10 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body: CartScreenBody()));
+    return SafeArea(
+      child: Scaffold(
+        body: CartScreenBody(),
+      ),
+    );
   }
 }

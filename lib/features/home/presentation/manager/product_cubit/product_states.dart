@@ -18,3 +18,6 @@ final class ProductsFailure extends ProductStates {
 
   ProductsFailure({required this.errMessage});
 }
+
+final class ProductUpdatedState extends ProductStates {
+}

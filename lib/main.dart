@@ -5,6 +5,9 @@ import 'package:ecommerce/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/auth/presentation/views/sign_in_screen.dart';
+import 'features/home/presentation/manager/cart_cubit.dart';
+import 'features/home/presentation/manager/category_cubit/category_cubit.dart';
+import 'features/home/presentation/manager/product_cubit/product_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +16,8 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserCubit(getIt.get<DioConsumer>())),
+        BlocProvider(create: (context) => CartCubit(),),
+
       ],
       child: const MyApp(),
     ),

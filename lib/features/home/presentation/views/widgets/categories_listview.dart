@@ -16,7 +16,7 @@ class CategoriesListView extends StatelessWidget {
         if (state is CategoriesSuccess) {
           return SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 70,
+            height: 75,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 22),
