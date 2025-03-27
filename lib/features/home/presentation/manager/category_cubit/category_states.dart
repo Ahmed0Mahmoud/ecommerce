@@ -20,18 +20,4 @@ final class CategoriesFailure extends CategoryStates {
   CategoriesFailure({required this.errMessage});
 }
 
-final class ProductsLoading extends CategoryStates {}
-
-final class ProductsSuccess extends CategoryStates {
-  final List<ProductModel> models;
-
-  ProductsSuccess({required this.models});
-}
-
-final class ProductsFailure extends CategoryStates {
-  final String errMessage;
-
-  ProductsFailure({required this.errMessage});
-}
-
 final class CategoryIndexChanged extends CategoryStates {}

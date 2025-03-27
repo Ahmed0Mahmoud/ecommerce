@@ -2,6 +2,7 @@
 import 'package:ecommerce/features/home/presentation/manager/product_cubit/product_cubit.dart';
 import 'package:ecommerce/features/home/presentation/manager/product_cubit/product_states.dart';
 import 'package:ecommerce/features/home/presentation/views/widgets/product_card.dart';
+import 'package:ecommerce/features/home/presentation/views/widgets/products_shimmer_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,10 +37,15 @@ class ProductsGridView extends StatelessWidget {
           );
         }
         else {
-          return Center(child: CircularProgressIndicator());
+          return ProductsShimmerEffect();
         }
 
       },
     );
   }
 }
+
+
+
+
+

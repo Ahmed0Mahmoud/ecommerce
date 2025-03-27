@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../manager/category_cubit/category_cubit.dart';
 import '../../manager/category_cubit/category_states.dart';
+import 'categories_shimmer_effect.dart';
 import 'category_card.dart';
 
 class CategoriesListView extends StatelessWidget {
@@ -19,22 +19,26 @@ class CategoriesListView extends StatelessWidget {
             height: 75,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 22),
+              padding: const EdgeInsets.symmetric(horizontal: 22),
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: CategoryCard(catModel: state.models[index], index: index,),
+                  child: CategoryCard(
+                    catModel: state.models[index],
+                    index: index,
+                  ),
                 );
               },
-              itemCount: 5,
+              itemCount: state.models.length,
             ),
           );
         } else if (state is CategoriesFailure) {
           return SizedBox(height: 60, child: Text(state.errMessage));
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const CategoriesShimmerEffect(); // Show shimmer when loading
         }
       },
     );
   }
 }
+

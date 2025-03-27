@@ -48,6 +48,7 @@ dependencies:
   get_it:
   cached_network_image:
   sticky_footer_scrollview: ^1.1.0
+  shimmer: ^3.0.0
 
 
 
