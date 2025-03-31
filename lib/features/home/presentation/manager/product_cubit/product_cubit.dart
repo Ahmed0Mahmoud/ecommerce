@@ -67,36 +67,4 @@ class ProductCubit extends Cubit<ProductStates> {
 
 
 
-
-
-// Future getCatProducts({required int catId}) async {
-  //   try {
-  //     emit(ProductsLoading());
-  //
-  //     final response = await api.get(
-  //       ApiEndpoints.getCategoryProductsEndPoint(),
-  //       queryParameters: {
-  //         "categoryId" : catId,
-  //         "offset" : 0,
-  //         "limit" : 10,
-  //       }
-  //     );
-  //
-  //     // Ensure response.data exists and is a List
-  //     if (response.data is List) {
-  //       final List<ProductModel> models = (response.data as List)
-  //           .map((item) => ProductModel.fromJson(item))
-  //           .toList();
-  //
-  //       emit(ProductsSuccess(models: models));
-  //     } else {
-  //       emit(ProductsFailure(errMessage: "Invalid response format"));
-  //     }
-  //   } on ServerException catch (e) {
-  //     emit(ProductsFailure(errMessage: e.errModel.errMessage));
-  //   } catch (e) {
-  //     emit(ProductsFailure(errMessage: "An unexpected error occurred"));
-  //   }
-  // }
-
 }

@@ -7,6 +7,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 token() async {
   final token = await StorageHelper().getToken(key: ApiKeys.token);
+  return token;
 }
 
 class DioConsumer extends ApiConsumer {
@@ -17,18 +18,22 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  get(
-    String path, {
-    data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-
-  }) async {
+  Future<dynamic> get(
+      String path, {
+        data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+      }) async {
+    final String? userToken = await token(); // Ensure token is awaited
     Response response = await dio.get(
       path,
       data: data,
       queryParameters: queryParameters,
-      options: Options(headers: {ApiKeys.token: "Bearer${token()}"}),
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $userToken",  // Ensure correct header format
+        },
+      ),
     );
     return response.data;
   }

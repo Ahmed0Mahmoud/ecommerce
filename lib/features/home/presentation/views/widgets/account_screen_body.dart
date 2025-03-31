@@ -1,56 +1,84 @@
+import 'package:ecommerce/features/auth/presentation/manager/user_cubit.dart';
+import 'package:ecommerce/features/auth/presentation/manager/user_state.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../auth/presentation/views/widgets/log_out_button.dart';
-import 'custom_appbar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AccountScreenBody extends StatelessWidget {
   const AccountScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomAppBar(title: 'Account'),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: ListView(
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is GetProfileSuccess) {
+          return ListView(
+            children: [
+              const SizedBox(height: 16),
+
+              //! Profile Picture
+              CircleAvatar(
+                radius: 80,
+                backgroundImage: NetworkImage(
+                  scale: 5,
+              state.model.profilePic.isNotEmpty
+              ? state.model.profilePic
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHEB-FmVpoxcfMWFBHLpHd7FjhRBXJ6aaLjw&s",
+              ),
+              ),
+               const SizedBox(height: 16),
+
+              //! Edit Profile Button
+              MaterialButton(
+                onPressed: () {
+                  // Navigator.push(
+                  // context,
+                  // MaterialPageRoute(
+                  // builder: (context) => EditProfileScreen(user: state.user),
+                  // ),
+                  // );
+                },
+                child: const Text(
+                  'Edit Profile',
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
+
+              //! Name
+              ListTile(
+                title: Text(state.model.name),
+                leading: const Icon(Icons.person),
+              ),
+              const SizedBox(height: 16),
+
+              //! Email
+              ListTile(
+                title: Text(state.model.email),
+                leading: const Icon(Icons.email),
+              ),
+              const SizedBox(height: 16),
+            ],
+          );
+        } else if (state is GetProfileFailure) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildListTile(Icons.inventory_2_outlined, "My Orders"),
-                _buildDivider(7),
-                _buildListTile(Icons.person_outline, "My Details"),
-                _buildDivider(1),
-                _buildListTile(Icons.home_outlined, "Address Book"),
-                _buildDivider(1),
-                _buildListTile(Icons.help_outline, "FAQs"),
-                _buildDivider(1),
-                _buildListTile(Icons.headset_mic_outlined, "Help Center"),
-                _buildDivider(7),
-                const SizedBox(height: 50),
-                LogOutButton(),
+                const Text(
+                  'Failed to load profile',
+                  style: TextStyle(color: Colors.red, fontSize: 18),
+                ),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: () => context.read<UserCubit>().getProfile(),
+                  child: const Text('Retry'),
+                ),
               ],
             ),
-          ),
-        ),
-      ],
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
-}
-
-Widget _buildListTile(IconData icon, String title) {
-  return ListTile(
-    leading: Icon(icon, size: 28),
-    title: Text(
-      title,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-    ),
-    trailing: const Icon(Icons.arrow_forward_ios, size: 18),
-    onTap: () {
-      // Handle navigation
-    },
-  );
-}
-
-Widget _buildDivider(double think) {
-  return Divider(thickness: think, color: Colors.grey);
 }

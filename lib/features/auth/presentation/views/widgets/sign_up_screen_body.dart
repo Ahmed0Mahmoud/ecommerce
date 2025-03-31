@@ -1,13 +1,14 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:ecommerce/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:ecommerce/features/auth/presentation/manager/auth_state.dart';
+import 'package:ecommerce/core/utils/appRouter.dart';
+import 'package:ecommerce/features/auth/presentation/manager/user_cubit.dart';
+import 'package:ecommerce/features/auth/presentation/manager/user_state.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/page_heading.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/pick_image_widget.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/show_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../sign_in_screen.dart';
 import 'custom_form_button.dart';
 import 'custom_input_field.dart';
 
@@ -84,12 +85,7 @@ class SignUpScreenBody extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInScreen(),
-                            ),
-                          );
+                         GoRouter.of(context).push(Approuter.signInViewRoute);
                         },
                         child: Text(
                           'Sign-in',

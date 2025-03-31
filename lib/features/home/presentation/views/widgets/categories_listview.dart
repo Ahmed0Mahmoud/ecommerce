@@ -29,7 +29,7 @@ class CategoriesListView extends StatelessWidget {
                   ),
                 );
               },
-              itemCount: state.models.length,
+              itemCount: 5,
             ),
           );
         } else if (state is CategoriesFailure) {

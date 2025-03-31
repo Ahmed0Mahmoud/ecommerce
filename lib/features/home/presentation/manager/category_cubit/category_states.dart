@@ -1,4 +1,3 @@
-import 'package:ecommerce/features/home/data/models/product_model/product_model.dart';
 
 import '../../../data/models/categories_model/categories_model.dart';
 

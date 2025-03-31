@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../manager/auth_cubit.dart';
-import '../../manager/auth_state.dart';
+import '../../manager/user_cubit.dart';
+import '../../manager/user_state.dart';
 
 class PickImageWidget extends StatelessWidget {
   const PickImageWidget({super.key});
@@ -36,6 +36,7 @@ class PickImageWidget extends StatelessWidget {
                                     (value) => context
                                         .read<UserCubit>()
                                         .uploadProfilePic(value!),
+                                       //.uploadFile(image: value!),
                                   );
                             },
                             child: Container(
@@ -64,6 +65,7 @@ class PickImageWidget extends StatelessWidget {
                     backgroundColor: Colors.grey.shade200,
                     backgroundImage: FileImage(
                       File(context.read<UserCubit>().profilePic!.path),
+
                     ),
                   ),
         );

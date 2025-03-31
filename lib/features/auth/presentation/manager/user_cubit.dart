@@ -1,13 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:ecommerce/core/errors/exceptions.dart';
 import 'package:ecommerce/core/network/api_consumer.dart';
 import 'package:ecommerce/core/network/end_points.dart';
+import 'package:ecommerce/core/utils/service_locator.dart';
 import 'package:ecommerce/core/utils/storage_helper.dart';
 import 'package:ecommerce/features/auth/data/models/login_model.dart';
+import 'package:ecommerce/features/auth/data/models/profileModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'auth_state.dart';
+import '../../../../core/utils/upload_image_to_api.dart';
+import 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   final ApiConsumer api;
@@ -32,6 +36,7 @@ class UserCubit extends Cubit<UserState> {
 
   // Profile Pic
   XFile? profilePic;
+
 
   uploadProfilePic(XFile? image) {
     profilePic = image;
@@ -82,7 +87,7 @@ class UserCubit extends Cubit<UserState> {
           ApiKeys.name: signUpName.text,
           ApiKeys.email: signUpEmail.text,
           ApiKeys.password: signUpPassword.text,
-          ApiKeys.profilePic: "https://api.lorem.space/image/face?w=640&h=480",
+          ApiKeys.profilePic: await uploadFile(image: profilePic!),
         },
       );
       emit(SignupSuccess(message: 'Done'));
@@ -90,4 +95,49 @@ class UserCubit extends Cubit<UserState> {
       emit(SignupFailure(errMessage: e.errModel.errMessage));
     }
   }
+
+  getToken()async{
+    final token = await getIt.get<StorageHelper>().getToken(key: ApiKeys.token);
+    return token;
+  }
+
+  Future<void> getProfile() async {
+    try {
+      emit(GetProfileLoading());
+      final token = await getToken();
+      print('Token is: $token');
+
+      final response = await api.get(
+        ApiEndpoints.getProfileEndPoint,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer$token' ,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      final model = ProfileModel.fromJson(response);
+      emit(GetProfileSuccess(model: model));
+    } on ServerException catch (e) {
+      emit(GetProfileFailure(errMessage: e.errModel.errMessage));
+    }
+  }
+  
+  uploadFile({required XFile image})async{
+   try {
+     final file = await uploadImageToAPI(image: image);
+     final response = await api.post(
+         ApiEndpoints.uploadEndPoint,
+         isFormData: true,
+         data: {'file' : file}
+     );
+     return response['location'];
+
+   }  catch (e) {
+       print("Image upload error: $e");
+       throw Exception("Image upload failed");
+   }
+  }
+
 }

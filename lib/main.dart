@@ -1,10 +1,9 @@
-
 import 'package:ecommerce/core/network/dio_consumer.dart';
+import 'package:ecommerce/core/utils/appRouter.dart';
 import 'package:ecommerce/core/utils/service_locator.dart';
-import 'package:ecommerce/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:ecommerce/features/auth/presentation/manager/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/auth/presentation/views/sign_in_screen.dart';
 import 'features/home/presentation/manager/cart_cubit.dart';
 
 void main() {
@@ -26,10 +25,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: Approuter.router,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-
-      home: SignInScreen(),
     );
   }
 }

@@ -4,6 +4,10 @@ class ApiEndpoints {
   static String signUpEndPoint = '/api/v1/users/';
   static String getCategoriesEndPoint = '/api/v1/categories/';
   static String getProductsEndPoint = '/api/v1/products/';
+  static String getProfileEndPoint = '/api/v1/auth/profile';
+  static String uploadEndPoint = '/api/v1/files/upload';
+
+
   static String getCategoryProductsEndPoint() {
     return '/api/v1/products/';
   }

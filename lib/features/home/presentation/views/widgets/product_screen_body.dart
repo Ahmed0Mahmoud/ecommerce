@@ -27,17 +27,21 @@ class ProductScreenBody extends StatelessWidget {
         CustomAppBar(title: 'Details'),
         SizedBox(height: 20),
         Center(
-            child: Container(
-            alignment: Alignment.center,
-            width: 341,
-            height: 350,
-            decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image:  NetworkImage(
-                checkUrl(model.images!.first),
-              ),fit: BoxFit.cover),
-            ),
+            child: Hero(
+              tag: 'hero${model.id}',
+              transitionOnUserGestures: true,
+              child: Container(
+              alignment: Alignment.center,
+              width: 341,
+              height: 350,
+              decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image:  NetworkImage(
+                  checkUrl(model.images!.first),
+                ),fit: BoxFit.cover),
+              ),
+              ),
             ),
         ),
         SizedBox(height: 20),

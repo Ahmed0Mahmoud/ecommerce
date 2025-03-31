@@ -1,43 +1,20 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:ecommerce/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:ecommerce/features/auth/presentation/manager/auth_state.dart';
+import 'package:ecommerce/core/utils/appRouter.dart';
+import 'package:ecommerce/features/auth/presentation/manager/user_cubit.dart';
+import 'package:ecommerce/features/auth/presentation/manager/user_state.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/page_heading.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/show_dialog.dart';
-import 'package:ecommerce/features/home/presentation/views/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../../core/network/end_points.dart';
-import '../../../../../core/utils/storage_helper.dart';
 import '../sign_up_screen.dart';
 import 'custom_form_button.dart';
 import 'custom_input_field.dart';
 import 'forget_password_button.dart';
 
-class SignInScreenBody extends StatefulWidget {
+class SignInScreenBody extends StatelessWidget {
   const SignInScreenBody({super.key});
-
-  @override
-  State<SignInScreenBody> createState() => _SignInScreenBodyState();
-}
-
-class _SignInScreenBodyState extends State<SignInScreenBody> {
-  getToken() async {
-    final token = await StorageHelper().getToken(key: ApiKeys.token);
-    print('Token retrieved: $token'); // Debugging print
-    if (token != null && token.isNotEmpty) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() => getToken());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +25,7 @@ class _SignInScreenBodyState extends State<SignInScreenBody> {
             message: 'success',
             type: AnimatedSnackBarType.success,
           ).show(context);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => MainScreen()),
-          );
+          GoRouter.of(context).pushReplacement(Approuter.mainViewRoute);
         } else if (state is LoginFailure) {
           ShowAnimatedSnackbar(
             message: state.errMessage,
