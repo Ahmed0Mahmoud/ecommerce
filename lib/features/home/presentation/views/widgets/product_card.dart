@@ -1,4 +1,4 @@
-import 'package:ecommerce/core/utils/appRouter.dart';
+import 'package:ecommerce/core/utils/app_router.dart';
 import 'package:ecommerce/features/home/data/models/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

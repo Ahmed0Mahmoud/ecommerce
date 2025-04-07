@@ -1,5 +1,5 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:ecommerce/core/utils/appRouter.dart';
+import 'package:ecommerce/core/utils/app_router.dart';
 import 'package:ecommerce/features/auth/presentation/manager/user_cubit.dart';
 import 'package:ecommerce/features/auth/presentation/manager/user_state.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/page_heading.dart';

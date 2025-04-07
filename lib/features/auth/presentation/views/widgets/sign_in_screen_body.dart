@@ -1,5 +1,5 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:ecommerce/core/utils/appRouter.dart';
+import 'package:ecommerce/core/utils/app_router.dart';
 import 'package:ecommerce/features/auth/presentation/manager/user_cubit.dart';
 import 'package:ecommerce/features/auth/presentation/manager/user_state.dart';
 import 'package:ecommerce/features/auth/presentation/views/widgets/page_heading.dart';
@@ -13,9 +13,14 @@ import 'custom_form_button.dart';
 import 'custom_input_field.dart';
 import 'forget_password_button.dart';
 
-class SignInScreenBody extends StatelessWidget {
+class SignInScreenBody extends StatefulWidget {
   const SignInScreenBody({super.key});
 
+  @override
+  State<SignInScreenBody> createState() => _SignInScreenBodyState();
+}
+
+class _SignInScreenBodyState extends State<SignInScreenBody> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
@@ -25,6 +30,7 @@ class SignInScreenBody extends StatelessWidget {
             message: 'success',
             type: AnimatedSnackBarType.success,
           ).show(context);
+          Future.delayed(Duration(seconds: 4));
           GoRouter.of(context).pushReplacement(Approuter.mainViewRoute);
         } else if (state is LoginFailure) {
           ShowAnimatedSnackbar(
@@ -82,6 +88,9 @@ class SignInScreenBody extends StatelessWidget {
                               innerText: 'Sign In',
                               onPressed: () {
                                 context.read<UserCubit>().login();
+                                setState(() {
+
+                                });
                               },
                             ),
                         SizedBox(height: 16),

@@ -1,5 +1,6 @@
 
-import '../../data/models/product_model/product_model.dart';
+
+import '../../../data/models/product_model/product_model.dart';
 
 class CartState {}
 

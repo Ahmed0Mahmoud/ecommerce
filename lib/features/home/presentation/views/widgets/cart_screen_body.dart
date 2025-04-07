@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../manager/cart_cubit.dart';
-import '../../manager/cart_state.dart';
+import '../../manager/cart_cubit/cart_cubit.dart';
+import '../../manager/cart_cubit/cart_state.dart';
 import 'cart_item_card.dart';
 import 'custom_appbar.dart';
 

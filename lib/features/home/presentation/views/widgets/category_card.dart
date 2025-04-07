@@ -17,7 +17,7 @@ class CategoryCard extends StatelessWidget {
     return InkWell(
       onTap: (){
         final categoryCubit = context.read<CategoryCubit>();
-        categoryCubit.getCurrecntIndex(index: index);
+        categoryCubit.getCurrentIndex(index: index);
         print('index = ${categoryCubit.curIndex}');
         context.read<ProductCubit>().getProducts(categoryCubit.curIndex);
       },
